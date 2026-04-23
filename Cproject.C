@@ -1,40 +1,87 @@
 #include <stdio.h>
+#include <string.h>
 #include <conio.h>
+#include <graphics.h>
 
-struct teacher
+struct TeacherRecord
 {
-    char name[20];
-    int exp;
+    int SN;
+    char name[30];
+    char department[50];
+    int experience;   // changed to int
+    int salary;
 };
 
 void main()
 {
-    struct teacher t[50];
-    int i, n;
+    int gd = DETECT, gm;
+    int Num_Teacher, i;
+    int add_y;
+    char text[100];
+
+    struct TeacherRecord T[100];
 
     clrscr();
 
-    printf("Enter number of teachers: ");
-    scanf("%d", &n);
+    printf("Enter number of Teachers: ");
+    scanf("%d", &Num_Teacher);
 
-    for(i = 0; i < n; i++)
+    // INPUT
+    for(i = 0; i < Num_Teacher; i++)
     {
-        printf("\nName: ");
-        scanf("%s", t[i].name);
+        printf("\nEnter Teacher %d details\n", i+1);
 
-        printf("Experience: ");
-        scanf("%d", &t[i].exp);
+        printf("SN: ");
+        scanf("%d", &T[i].SN);
+
+        printf("Name: ");
+        scanf("%s", T[i].name);
+
+        printf("Department: ");
+        scanf("%s", T[i].department);
+
+        printf("Experience (in years): ");
+        scanf("%d", &T[i].experience);   // integer input
+
+        printf("Salary: ");
+        scanf("%d", &T[i].salary);
     }
 
-    printf("\nTeachers with experience > 10:\n");
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
 
-    for(i = 0; i < n; i++)
+    // BOX TITLE
+    rectangle(150, 150, 500, 400);
+    outtextxy(160, 160, "Teachers with Experience > 10 Years");
+
+    add_y = 180;
+
+    // FILTER: experience > 10
+    for(i = 0; i < Num_Teacher; i++)
     {
-        if(t[i].exp > 10)
+        if(T[i].experience > 10)
         {
-            printf("%s\n", t[i].name);
+            sprintf(text, "SN: %d", T[i].SN);
+            outtextxy(160, add_y, text);
+            add_y += 20;
+
+            sprintf(text, "Name: %s", T[i].name);
+            outtextxy(160, add_y, text);
+            add_y += 20;
+
+            sprintf(text, "Department: %s", T[i].department);
+            outtextxy(160, add_y, text);
+            add_y += 20;
+
+            sprintf(text, "Experience: %d", T[i].experience);
+            outtextxy(160, add_y, text);
+            add_y += 20;
+
+            sprintf(text, "Salary: %d", T[i].salary);
+            outtextxy(160, add_y, text);
+            add_y += 30;
         }
     }
 
     getch();
+    closegraph();
 }
