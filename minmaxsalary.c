@@ -75,7 +75,7 @@ void main()
             min = i;
     }
 
-    // Graphics
+    // using Graphics
     initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
 
     // Highest salary
