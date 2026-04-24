@@ -49,7 +49,7 @@ void main()
 
     initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
 
-    // BOX TITLE
+    //USING BOX 
     rectangle(150, 150, 500, 400);
     outtextxy(160, 160, "Science Department Teachers");
 
